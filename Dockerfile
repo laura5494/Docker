@@ -18,12 +18,12 @@ ENV LANG C.UTF-8
   #Create Odoo user for PostgreSQL
   RUN sudo su - postgres -c "createuser -s odoo" 2> /dev/null || true
   
-  COPY odoo.deb .
-RUN set -x; \
-         dpkg --force-depends -i odoo.deb \
-         && apt-get update \
-         && apt-get -y install -f --no-install-recommends \
-         && rm -rf odoo.deb
+  #COPY odoo.deb .
+ #RUN set -x; \
+         # dpkg --force-depends -i odoo.deb \
+         # && apt-get update \
+          #&& apt-get -y install -f --no-install-recommends \
+          #&& rm -rf odoo.deb
          
 #Install Python Dependencies
 RUN sudo apt-get install git python3 python3-pip build-essential wget python3-dev python3-venv python3-wheel libxslt-dev libzip-dev libldap2-dev libsasl2-dev python3-setuptools node-less libjpeg-dev gdebi -y
