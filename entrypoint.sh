@@ -12,7 +12,7 @@ set -e
 DB_ARGS=()
 function check_config() {
     param="$1"
-    value="$2"    
+    value="$2"
     if grep -q -E "^\s*\b${param}\b\s*=" "$ODOO_RC" ; then       
         value=$(grep -E "^\s*\b${param}\b\s*=" "$ODOO_RC" |cut -d " " -f3|sed 's/["\n\r]//g')
     fi;
