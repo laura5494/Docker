@@ -1,27 +1,27 @@
-version: "2"
+version: '2'
 services:
-  odoo:
-    build: .
-    image: odoo:11
-    ports:
-      - 80:8069
-    volumes:
-      - ./addons:/mnt/extra-addons
-      - odoo-web-data:/var/lib/odoo
+  web:
+    image: odoo:12
+    build: ./
     depends_on:
       - db
-    restart: always
+    ports:
+      - "8069:8069"
+    volumes:
+      - ./config:/etc/odoo
+      - ./addons:/mnt/extra-addons
   db:
-    image: postgres:10
+    image: postgres:9.6
     environment:
+      - POSTGRES_DB=postgres
       - POSTGRES_PASSWORD=odoo
       - POSTGRES_USER=odoo
       - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
       - odoo-db-data:/var/lib/postgresql/data/pgdata
+      - ./scripts:/var/lib/postgresql/scrips
     ports:
-      - 5432:5432
-    restart: always
+      - "5433:5432"
 volumes:
   odoo-web-data:
   odoo-db-data:
